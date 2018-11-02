@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+  <record id="view_customerlabel_form" model="ir.ui.view">
+      <field name="name">repaircenter.customerlabel form</field>
+      <field name="model">repaircenter.customerlabel</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+           <form string="Print Labels">
+           <sheet string="Print Labels">
+              <group colspan="4" col="6">
+                  <field name="type" colspan="6"/>
+                  <strong colspan="6">Only fields associated with the label type will be printed.</strong>
+                  <field name="device" colspan="3"/>
+                  <field name="customer" colspan="3" />
+                  <field name="donation" colspan="3"/>
+                  <field name="serial" colspan="3"/>
+                  <field name="software" colspan="3"/>
+                  <field name="qty" colspan="3"/>
+              </group>
+              <button name="repaircenter.customerlabel" class="oe_highlight" type="action" string="Print Labels"/>
+
+           </sheet>
+           </form>
+       </field>
+   </record>
+
+  <record id="view_customerlabel_kanban" model="ir.ui.view">
+      <field name="name">repaircenter.customerlabel tree</field>
+      <field name="model">repaircenter.customerlabel</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+          <tree string="Print Labels">
+              <field name="type"/>
+          </tree>
+      </field>
+  </record>
+
+      <record id="view_repair_order_customerlabel_filter" model="ir.ui.view">
+          <field name="name">repaircenter.customerlabel select</field>
+          <field name="model">repaircenter.customerlabel</field>
+          <field name="type">search</field>
+          <field name="arch" type="xml">
+              <search string="Search Print Labels">
+                 <group>
+                      <field name="type"/>
+                  </group>
+                  <newline/>
+             </search>
+          </field>
+      </record>
+
+
+      <record id="action_customerlabel_form" model="ir.actions.act_window">
+          <field name="name">Print Labels</field>
+          <field name="res_model">repaircenter.customerlabel</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">form,kanban,tree</field>
+          <field name="view_id" ref="view_customerlabel_kanban"/>
+      </record>
+
+      <menuitem name="Label Printing" id="repaircenter.menu_customerlabel" parent="repaircenter.menu_options"
+                action="repaircenter.action_customerlabel_form" sequence="5" />
+
+</odoo>

@@ -1,0 +1,186 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+  <record id="repaircenter.backuplocations" model="ir.actions.act_window">
+    <field name="auto_search" eval="True"/>
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">action</field>
+    <field name="context">{}</field>
+    <field name="domain" eval="False"/>
+    <field name="filter" eval="False"/>
+    <field name="groups_id"/>
+    <field name="help"><![CDATA[<p class="o_view_nocontent_smiling_face">
+                        Manage your backup devices here. Add the name of the device and folders for easier organization of your backups.
+                    </p>
+                    <p>
+                    </p>
+                ]]></field>
+    <field name="limit">80</field>
+    <field name="multi" eval="False"/>
+    <field name="name">Backup Locations</field>
+    <field name="res_model">repaircenter.backuplocation</field>
+    <field name="search_view_id" eval="False"/>
+    <field name="src_model" eval="False"/>
+    <field name="target">current</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="usage" eval="False"/>
+    <field name="view_id" eval="False"/>
+    <field name="view_mode">tree,form</field>
+    <field name="view_type">form</field>
+  </record>
+  <record id="repaircenter.backupsoftware" model="ir.actions.act_window">
+    <field name="auto_search" eval="True"/>
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">action</field>
+    <field name="context">{}</field>
+    <field name="domain" eval="False"/>
+    <field name="filter" eval="False"/>
+    <field name="groups_id"/>
+    <field name="help"><![CDATA[<p class="o_view_nocontent_smiling_face">
+                        Easily manage what software you want/need backed up here. These will be visible on Repair Tickets when saved.
+                    </p>
+                    <p>
+                    </p>
+                ]]></field>
+    <field name="limit">80</field>
+    <field name="multi" eval="False"/>
+    <field name="name">Backup Option</field>
+    <field name="res_model">repaircenter.backupsoftware</field>
+    <field name="search_view_id" eval="False"/>
+    <field name="src_model" eval="False"/>
+    <field name="target">current</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="usage" eval="False"/>
+    <field name="view_id" eval="False"/>
+    <field name="view_mode">tree,form</field>
+    <field name="view_type">form</field>
+  </record>
+  <record id="repaircenter.ticket" model="ir.actions.act_window">
+    <field name="auto_search" eval="True"/>
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">action</field>
+    <field name="context">{}</field>
+    <field name="domain" eval="False"/>
+    <field name="filter" eval="False"/>
+    <field name="groups_id"/>
+    <field name="help"><![CDATA[<p class="o_view_nocontent_smiling_face">
+                        Welcome to your Repair Center Ticket Manager!
+                    </p>
+                    <p>
+                        From here you can track, create, edit, and close repair tickets. You don't have any yet, but that'll change soon.
+                    </p>
+                ]]></field>
+    <field name="limit">80</field>
+    <field name="multi" eval="False"/>
+    <field name="name">Repairs</field>
+    <field name="res_model">repaircenter.ticket</field>
+    <field name="search_view_id" eval="False"/>
+    <field name="src_model" eval="False"/>
+    <field name="target">current</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="usage" eval="False"/>
+    <field name="view_id" eval="False"/>
+    <field name="view_mode">kanban,tree,form</field>
+    <field name="view_type">form</field>
+  </record>
+  <record id="repaircenter.services" model="ir.actions.act_window">
+    <field name="auto_search" eval="True"/>
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">action</field>
+    <field name="context">{}</field>
+    <field name="domain" eval="False"/>
+    <field name="filter" eval="False"/>
+    <field name="groups_id"/>
+    <field name="help"><![CDATA[<p class="o_view_nocontent_smiling_face">
+                        Manage the types of services you offer from this menu. We've started you with some common ones.
+                    </p>
+                    <p>
+                    </p>
+                ]]></field>
+    <field name="limit">80</field>
+    <field name="multi" eval="False"/>
+    <field name="name">Services</field>
+    <field name="res_model">repaircenter.services</field>
+    <field name="search_view_id" eval="False"/>
+    <field name="src_model" eval="False"/>
+    <field name="target">current</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="usage" eval="False"/>
+    <field name="view_id" eval="False"/>
+    <field name="view_mode">tree,form</field>
+    <field name="view_type">form</field>
+  </record>
+  <record id="repaircenter.stages" model="ir.actions.act_window">
+    <field name="auto_search" eval="True"/>
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">action</field>
+    <field name="context">{}</field>
+    <field name="domain" eval="False"/>
+    <field name="filter" eval="False"/>
+    <field name="groups_id"/>
+    <field name="help"><![CDATA[<p class="o_view_nocontent_smiling_face">
+                        Manage the stages your repairs go through with this section. We've started you with some to streamline your process.
+                    </p>
+                    <p>
+                    </p>
+                ]]></field>
+    <field name="limit">80</field>
+    <field name="multi" eval="False"/>
+    <field name="name">Stage View</field>
+    <field name="res_model">repaircenter.stages</field>
+    <field name="search_view_id" eval="False"/>
+    <field name="src_model" eval="False"/>
+    <field name="target">current</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="usage" eval="False"/>
+    <field name="view_id" eval="False"/>
+    <field name="view_mode">tree,form</field>
+    <field name="view_type">form</field>
+  </record>
+  <record id="repaircenter.customerlabel" model="ir.actions.act_window">
+    <field name="auto_search" eval="True"/>
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">action</field>
+    <field name="context">{}</field>
+    <field name="domain" eval="False"/>
+    <field name="filter" eval="False"/>
+    <field name="groups_id"/>
+    <field name="help"><![CDATA[<p class="o_view_nocontent_smiling_face">
+                        Manage and print labels for customer devices and donations.
+                    </p>
+                    <p>
+                    </p>
+                ]]></field>
+    <field name="limit">80</field>
+    <field name="multi" eval="False"/>
+    <field name="name">Print Labels</field>
+    <field name="res_model">repaircenter.customerlabel</field>
+    <field name="search_view_id" eval="False"/>
+    <field name="src_model" eval="False"/>
+    <field name="target">current</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="usage" eval="False"/>
+    <field name="view_id" eval="False"/>
+    <field name="view_mode">tree,form</field>
+    <field name="view_type">form</field>
+  </record>
+
+
+<menuitem name="Repair Center" id="repaircenter.menu_root" sequence="0"/>
+<!-- menu categories -->
+<menuitem name="Repairs" id="repaircenter.menu_repair" parent="repaircenter.menu_root"
+          action="repaircenter.ticket"/>
+<menuitem name="Options" id="repaircenter.menu_options" parent="repaircenter.menu_root"/>
+
+<menuitem name="Backup Locations" id="repaircenter.menu_backuplocations" parent="repaircenter.menu_options"
+          action="repaircenter.backuplocations" sequence="1"/>
+<menuitem name="Backup Options" id="repaircenter.menu_backupsoftware" parent="repaircenter.menu_options"
+          action="repaircenter.backupsoftware" sequence="2"/>
+<menuitem name="Stages" id="repaircenter.menu_stages" parent="repaircenter.menu_options"
+          action="repaircenter.stages" sequence="3"/>
+<menuitem name="Services" id="repaircenter.menu_services" parent="repaircenter.menu_options"
+          action="repaircenter.services" sequence="4"/>
+<menuitem name="Print Labels" id="repaircenter.menu_customerlabel" parent="repaircenter.menu_options"
+          action="repaircenter.customerlabel" sequence="5"/>
+
+
+</odoo>

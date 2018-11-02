@@ -1,0 +1,379 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+  <!-- STAGE VIEWS -->
+  <record id="repaircenter_stage_view_tree" model="ir.ui.view">
+    <field name="name">repaircenter.stages.tree</field>
+    <field name="model">repaircenter.stages</field>
+    <field name="arch" type="xml">
+      <tree string="Stage">
+        <field name="name"/>
+        <field name="is_close"/>
+        <field name="fold"/>
+        <field name="incoming"/>
+      </tree>
+    </field>
+  </record>
+  <record id="repaircenter_stage_view_form" model="ir.ui.view">
+    <field name="name">repaircenter.stages.form</field>
+    <field name="model">repaircenter.stages</field>
+    <field name="arch" type="xml">
+      <form string="Stage Search">
+        <sheet>
+          <group>
+            <group>
+              <field name="name"/>
+            </group>
+            <group>
+              <field name="is_close"/>
+              <field name="fold"/>
+              <field name="incoming"/>
+            </group>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  <record id="repaircenter_stage_action" model="ir.actions.act_window">
+    <field name="name">Stages</field>
+    <field name="res_model">repaircenter.stages</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        Create a new stage in your repaircenter pipeline
+      </p><p>
+      Stages will allow operators to easily track how a specific
+      tickets are positioned in the process.
+    </p>
+  </field>
+</record>
+
+<!-- TICKET FORM VIEW -->
+<record id="repaircenter.ticket_form" model="ir.ui.view">
+  <field name="active" eval="True"/>
+  <field name="field_parent" eval="False"/>
+  <field name="groups_id" eval="[(6, 0, [])]"/>
+  <field name="inherit_id" eval="False"/>
+  <field name="key" eval="False"/>
+  <field name="mode">primary</field>
+  <field name="model">repaircenter.ticket</field>
+  <field name="name">Repair Ticket Form Template</field>
+  <field name="priority">16</field>
+  <field name="type">form</field>
+  <field name="arch" type="xml">
+    <form>
+      <header>
+        <field name="stage" options="{'clickable': '1', 'fold_field': 'fold'}" widget="statusbar"/>
+      </header>
+      <div class="oe_button_box">
+
+    </div>
+      <sheet string="Repairs">
+        <div class="oe_button_box" name="button_box">
+          <button
+            class="oe_stat_button"
+            icon="fa-file"
+            type="action"
+            name="repaircenter.repair_tickets_invoice_view">
+            <field name="order_count" string="Repair Tickets" widget="statinfo"/>
+          </button>
+        </div>
+        <div class="oe_title">
+            <h1>
+              Ticket: <field name="id" string="Ticket: " />
+            </h1>
+        </div>
+
+        <group name="">
+          <group name="left" string="Customer Info">
+            <field name="customer" widget="many2one"/>
+            <field name="email" string="Email" modifiers="{}"/>
+            <field name="phone" string="Phone" can_write="true" />
+            <field name="mobile" string="Mobile"/>
+          </group>
+          <group name="right" string="Repair Info">
+            <field name="id" invisible="1"/>
+            <field name="technician" string="Technician" widget="res_partner_many2one" options="{'no_open': True}"/>
+            <field name="priority" widget="priority" string="High Priority"/>
+          </group>
+        </group>
+        <notebook name="ticket_sections">
+          <page name="ticket_section_1" string="Check-in">
+            <notebook name="ticket_checkin">
+              <page name="ticket_description" string="Description">
+                <group>
+                  <group string="Repair Details">
+                    <field name="type" string="Service Type" options="{'no_open': True}"/>
+                    <field name="device" string="Device"/>
+                    <field name="issue" string="Issue" widget="text"/>
+                  </group>
+                  <group string="Peripherals">
+                    <field name="peripherals" widget="many2many" nolabel="1" options="{'no_quick_create': True}"/>
+                  </group>
+                </group>
+              </page>
+              <page name="ticket_login" string="Login">
+                <group>
+                  <group>
+                    <field name="adminact" string="Admin Account"/>
+                    <field name="password" string="Password/Passcode"/>
+                  </group>
+                  <group>
+                    <field name="appleid" string="Apple ID"/>
+                    <field name="applepass" string="Apple Password"/>
+                    <field name="windows" string="Windows Email"/>
+                    <field name="other" string="Other"/>
+                  </group>
+                </group>
+              </page>
+            </notebook>
+          </page>
+          <page  string="Backup Details">
+            <group >
+              <group  string="Backup Software/Folders">
+                <field name="backup" nolabel="1" widget="many2many"/>
+              </group>
+              <group name="studio_group_M73hJ_right" string="Location">
+                <field name="backupdevice" string="Backup Device"/>
+                <field name="backupfolder" string="Backup Folder"/>
+              </group>
+            </group>
+          </page>
+          <page name="studio_page_k7NuV" string="Check-Out">
+            <group>
+              <field name="completed" widget="html"/>
+            </group>
+          </page>
+          <page string="Other">
+            <group>
+
+            </group>
+          </page>
+        </notebook>
+      </sheet>
+      <div class="oe_chatter" name="studio_div_accd37">
+        <field name="message_follower_ids" widget="mail_followers"/>
+        <field name="message_ids" widget="mail_thread"/>
+      </div>
+    </form>
+  </field>
+
+</record>
+<!-- TICKET TREE VIEW -->
+<record id="repaircenter.ticket_tree_view" model="ir.ui.view">
+  <field name="name">repaircenter.ticket.tree</field>
+  <field name="model">repaircenter.ticket</field>
+  <field name="type">tree</field>
+  <field name="arch" type="xml">
+    <tree string="Repair Tickets" class="tickettree">
+      <field name="priority" widget="priority"/>
+      <field name="create_date"/>
+      <field name="customer"/>
+      <field name="device"/>
+      <field name="type"/>
+      <field name="technician"/>
+      <field name="stage"/>
+    </tree>
+  </field>
+</record>
+
+<!-- TICKET KANBAN VIEW -->
+<record id="repaircenter.ticket_kanban_view" model="ir.ui.view">
+  <field name="active" eval="True"/>
+  <field name="arch" type="xml">
+    <kanban string="Repairs">
+      <templates>
+        <t t-name="kanban-box">
+          <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+            <div class="o_kanban_card_content">
+              <field name="id" modifiers="{}"/>
+              <field name="priority" display="right" bold="True" widget="priority" default_value="0" attrs="{'invisible':[('priority', '=', '')]}"/>
+              <br/><field name="type" bold="True"/>
+              <field name="create_date" display="right" widget="datetime" /><br/>
+              <field name="device" display="right" widget=""/>
+              <field name="customer" display="full" widget=""/>
+              <field name="phone" display="" string="Phone: "/>
+              <field name="mobile" display="right" attrs="{'invisible':[('mobile', '=', '')]}"/>
+              <br/><field name="email" display="right" />
+            </div>
+          </div>
+        </t>
+      </templates>
+    </kanban>
+  </field>
+  <field name="field_parent" eval="False"/>
+  <field name="groups_id" eval="[(6, 0, [])]"/>
+  <field name="inherit_id" eval="False"/>
+  <field name="key" eval="False"/>
+  <field name="mode">primary</field>
+  <field name="model">repaircenter.ticket</field>
+  <field name="name">Default kanban view for Repair Tickets</field>
+  <field name="priority">16</field>
+  <field name="type">kanban</field>
+</record>
+<!-- TICKET KANBAN VIEW SORTING -->
+<record id="repaircenter.ticket_kanban_box" model="ir.ui.view">
+  <field name="active" eval="True"/>
+  <field name="field_parent" eval="False"/>
+  <field name="groups_id" eval="[(6, 0, [])]"/>
+  <field name="inherit_id" ref="repaircenter.ticket_kanban_view"/>
+  <field name="key" eval="False"/>
+  <field name="mode">extension</field>
+  <field name="model">repaircenter.ticket</field>
+  <field name="name">Default kanban view for Repair Center</field>
+  <field name="type">kanban</field>
+  <field name="arch" type="xml">
+    <data>
+      <xpath expr="//kanban[1]" position="attributes">
+        <attribute name="create">true</attribute>
+        <attribute name="default_group_by">stage</attribute>
+        <attribute name="quick_create">false</attribute>
+      </xpath>
+      <xpath expr="//kanban[1]/templates[1]" position="before">
+        <field name="stage"/>
+      </xpath>
+    </data>
+  </field>
+</record>
+
+
+<!-- BACKUP LOCATION VIEW -->
+<record id="repaircenter.backuplocation_view" model="ir.actions.act_window">
+  <field name="auto_search" eval="True"/>
+  <field name="binding_model_id" eval="False"/>
+  <field name="binding_type">action</field>
+  <field name="context">{}</field>
+  <field name="domain" eval="False"/>
+  <field name="filter" eval="False"/>
+  <field name="groups_id" eval="[(6, 0, [])]"/>
+  <field name="limit">80</field>
+  <field name="multi" eval="False"/>
+  <field name="name">Backup Locations</field>
+  <field name="res_model">repaircenter.backuplocation</field>
+  <field name="search_view_id" eval="False"/>
+  <field name="src_model" eval="False"/>
+  <field name="target">current</field>
+  <field name="type">ir.actions.act_window</field>
+  <field name="usage" eval="False"/>
+  <field name="view_id" eval="False"/>
+  <field name="view_mode">tree,form</field>
+  <field name="view_type">form</field>
+</record>
+
+<!-- BACKUP SOFTWARE VIEW -->
+<record id="repaircenter.backup_option_8794bc86-e995-426c-a31a-e43285a3edd1" model="ir.actions.act_window">
+  <field name="auto_search" eval="True"/>
+  <field name="binding_model_id" eval="False"/>
+  <field name="binding_type">action</field>
+  <field name="context">{}</field>
+  <field name="domain" eval="False"/>
+  <field name="filter" eval="False"/>
+  <field name="groups_id" eval="[(6, 0, [])]"/>
+  <field name="limit">80</field>
+  <field name="multi" eval="False"/>
+  <field name="name">Backup Option</field>
+  <field name="res_model">repaircenter.backupsoftware</field>
+  <field name="search_view_id" eval="False"/>
+  <field name="src_model" eval="False"/>
+  <field name="target">current</field>
+  <field name="type">ir.actions.act_window</field>
+  <field name="usage" eval="False"/>
+  <field name="view_id" eval="False"/>
+  <field name="view_mode">tree,form</field>
+  <field name="view_type">form</field>
+</record>
+
+<!-- TICKET COUNT ON CUSTOMER ACCOUNT -->
+<record id="repaircenter.customer_tickets" model="ir.ui.view">
+  <field name="active" eval="True"/>
+  <field name="arch" type="xml">
+    <data>
+      <xpath expr="//div[contains(@class,'oe_button_box')][not(ancestor::field)]" position="inside">
+        <button class="oe_stat_button" icon="fa-ticket" type="action" name="repaircenter.repair_tickets_order_view">
+          <field name="ticket_count" string="Repair Tickets" widget="statinfo"/>
+        </button>
+      </xpath>
+    </data>
+  </field>
+  <field name="field_parent" eval="False"/>
+  <field name="groups_id" eval="[(6, 0, [])]"/>
+  <field name="inherit_id" ref="base.view_partner_form"/>
+  <field name="key" eval="False"/>
+  <field name="mode">extension</field>
+  <field name="model">res.partner</field>
+  <field name="name">Ticket Count Field</field>
+  <field name="priority">99</field>
+  <field name="type">form</field>
+</record>
+<record id="repaircenter.repair_tickets_customer_view" model="ir.actions.act_window">
+  <field name="auto_search" eval="True"/>
+  <field name="binding_model_id" eval="False"/>
+  <field name="binding_type">action</field>
+  <field name="context">{'search_default_customer': active_id,'default_customer': active_id}</field>
+  <field name="domain">[('customer', '=', active_id)]</field>
+  <field name="filter" eval="False"/>
+  <field name="groups_id" eval="[(6, 0, [])]"/>
+  <field name="help" eval="False"/>
+  <field name="limit">80</field>
+  <field name="multi" eval="False"/>
+  <field name="name">Repair Tickets</field>
+  <field name="res_model">repaircenter.ticket</field>
+  <field name="search_view_id" eval="False"/>
+  <field name="src_model" eval="False"/>
+  <field name="target">current</field>
+  <field name="type">ir.actions.act_window</field>
+  <field name="usage" eval="False"/>
+  <field name="view_id" eval="False"/>
+  <field name="view_mode">tree,form</field>
+  <field name="view_type">form</field>
+</record>
+<record id="repaircenter.repair_tickets_order_view" model="ir.actions.act_window">
+  <field name="auto_search" eval="True"/>
+  <field name="binding_model_id" eval="False"/>
+  <field name="binding_type">action</field>
+  <field name="context">{'search_default_customer': active_id,'default_customer': active_id}</field>
+  <field name="domain">[('customer', '=', active_id)]</field>
+  <field name="filter" eval="False"/>
+  <field name="groups_id" eval="[(6, 0, [])]"/>
+  <field name="help" eval="False"/>
+  <field name="limit">80</field>
+  <field name="multi" eval="False"/>
+  <field name="name">Repair Tickets</field>
+  <field name="res_model">repaircenter.ticket</field>
+  <field name="search_view_id" eval="False"/>
+  <field name="src_model" eval="False"/>
+  <field name="target">current</field>
+  <field name="type">ir.actions.act_window</field>
+  <field name="usage" eval="False"/>
+  <field name="view_id" eval="False"/>
+  <field name="view_mode">tree,form</field>
+  <field name="view_type">form</field>
+</record>
+
+<!-- PRINT LABELS -->
+<record id="repaircenter.customerlabel_view" model="ir.actions.act_window">
+  <field name="auto_search" eval="True"/>
+  <field name="binding_model_id" eval="False"/>
+  <field name="binding_type">action</field>
+  <field name="context">{}</field>
+  <field name="domain" eval="False"/>
+  <field name="filter" eval="False"/>
+  <field name="groups_id" eval="[(6, 0, [])]"/>
+  <field name="limit">80</field>
+  <field name="multi" eval="False"/>
+  <field name="name">Print Labels</field>
+  <field name="res_model">repaircenter.customerlabel</field>
+  <field name="search_view_id" eval="False"/>
+  <field name="src_model" eval="False"/>
+  <field name="target">current</field>
+  <field name="type">ir.actions.act_window</field>
+  <field name="usage" eval="False"/>
+  <field name="view_id" eval="False"/>
+  <field name="view_mode">tree,form</field>
+  <field name="view_type">form</field>
+</record>
+
+
+
+</odoo>

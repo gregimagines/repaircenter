@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <report
+      id="repair_order"
+      model="repaircenter.ticket"
+      string="Repair Order"
+      name="repaircenter.repair_order_view"
+      file="repaircenter.repair_order"
+      report_type="qweb-pdf" />
+
+      <report
+        id="peripheral_tag"
+        model="repaircenter.ticket"
+        string="Peripherals Tag"
+        name="repaircenter.peripheral_tag_view"
+        file="repaircenter.peripheral_tag"
+        report_type="qweb-pdf"
+        />
+
+        <report
+          id="customerlabels"
+          model="repaircenter.customerlabels"
+          string="Support Labels"
+          name="repaircenter.customerlabels_view"
+          file="repaircenter.customerlabels"
+          report_type="qweb-pdf"
+          />
+          <!--    <record id="peripheral_tag" model="report.paperformat">
+          <field name="name">Peripheral Tags</field>
+          <field name="paperformat_ids" ref="repaircenter.peripheral_tag"/>
+          <field name="default" eval="True" />
+          <field name="format">custom</field>
+          <field name="page_height">29</field>
+          <field name="page_width">89</field>
+          <field name="orientation">Portrait</field>
+          <field name="margin_top">3</field>
+          <field name="margin_bottom">3</field>
+          <field name="margin_left">3</field>
+          <field name="margin_right">3</field>
+          <field name="header_line" eval="False" />
+          <field name="dpi">90</field>
+        </record>
+      -->
+
+      <template id="customerlabels_view">
+        <t t-call="web.html_container">
+          <t t-foreach="docs" t-as="doc">
+            <t t-foreach="range(doc.qty)" t-as="n">
+
+              <t t-call="web.internal_layout">
+                <div class="page">
+                  <div class="row mt32 mb32" id="informations">
+                    <div class="col-xs-6" t-if="doc.type in ['device']">
+                      <h2 class="text-center" t-field="doc.device" />
+                    </div>
+                    <div class="col-xs-6 text-center" t-if="doc.type in ['media']">
+                      <h4 t-field="doc.customer" />
+                      <p class="text-center">Made by:</p>
+                      <strong class="text-center">Computiverse</strong>
+                      <p class="text-center">(724)-655-4433</p>
+                    </div>
+                    <div class="col-xs-6" t-if="doc.type in ['donation']">
+                      <h3>Donation: </h3>
+                      <h4 class="mb0" t-field="doc.donation" />
+                    </div>
+                    <div class="col-xs-6" t-if="doc.type in ['serial']">
+                      <strong>Serial Information</strong>
+                      <h5 t-field="doc.software"><span>: </span></h5>
+                      <h5 t-field="doc.serial"/>
+                    </div>
+
+                    <div class="col-xs-6" style="text-align:center">
+                      <img src='/repaircenter/static/images/computiverse.jpg' style="max-width:90%"/>
+                      <p class="text-center small mt0 mb0">Supporting your digital world to keep you in the real one</p>
+                    </div>
+                  </div>
+                </div>
+              </t>
+            </t>
+          </t>
+        </t>
+      </template>
+
+
+      <template id="peripheral_tag_view">
+        <t t-call="web.html_container">
+          <t t-foreach="docs" t-as="doc">
+            <t t-call="web.internal_layout">
+              <div class="page">
+                <div class="row mt32 mb32" id="informations">
+                  <div t-if="doc.id" class="col-xs-6">
+                    <strong>Customer Peripheral</strong>
+                    <p class="mb0">Ticket No: <span t-field="doc.id"/></p>
+                    <p>Customer: <span t-field="doc.customer"/></p>
+                  </div>
+                  <div class="col-xs-6" style="text-align:center">
+                    <img src='/repaircenter/static/images/computiverse.jpg' style="max-width:90%"/>
+                    <p class="text-center small mt0 mb0">Supporting your digital world to keep you in the real one</p>
+                  </div>
+                </div>
+              </div>
+            </t>
+          </t>
+        </t>
+      </template>
+
+      <template id="repair_order_view">
+        <t t-call="web.html_container">
+          <t t-foreach="docs" t-as="doc">
+            <t t-call="web.basic_layout">
+              <style>
+                .col-container {
+                display: flex;
+                width: 100%;
+                position:fixed;
+                top:10px;
+                }
+                .col {
+                flex: 1;
+                padding: 16px;
+                }
+                .panel-heading {
+                padding:6px!important;}
+                .panel-body {
+                padding: 4px!important;
+                margin-bottom:8px!important;
+                }
+
+              </style>
+              <div id="col-container" class="header mt0 mb0">
+                <div class="col col-xs-4">
+                  <img src='/repaircenter/static/images/computiverse.jpg' style="max-width:90%"/>
+                </div>
+                <div class="col col-xs-4 text-center">
+                  <br/>
+                  <p>Mon-Fri: 10-6<br/>Sat:10-2</p>
+                  <p>724-655-4433<br/>computiverse.com</p>
+                </div>
+                <div class="col col-xs-4 text-right">
+                  <strong>Ticket No: <span t-field="doc.id"/></strong><br/>
+                  <strong>Checkin Date:</strong>
+                  <p t-field="doc.checkin_date"/>
+                  <strong>Checkout Date:</strong>
+                  <p t-field="doc.checkin_date"/>
+                </div>
+              </div>
+              <div class="page">
+                <div class="">
+                  <div class="panel panel-sm panel-default col-xs-4">
+                    <div class="panel-heading">Customer Info</div>
+                    <div class="panel-body" style="font-size:20px!important" t-field="doc.customer_name"
+                      t-options='{"widget": "contact", "fields": ["name", "email", "phone", "mobile"], "no_marker": False}' />
+                    </div>
+                    <div class="panel panel-default col-xs-4">
+                      <div class="panel-heading" t-if="doc.type">Repair Type</div>
+                      <div class="panel-body" t-if="doc.type" t-field="doc.type"/>
+                      <div class="panel-heading" t-if="doc.item">Item</div>
+                      <div class="panel-body" t-if="doc.item" t-field="doc.item"/>
+                    </div>
+                    <div class="panel panel-default col-xs-3" >
+                      <div class="panel-heading" t-if="doc.priority">Priority Repair</div>
+                      <div class="panel-body" t-if="doc.priority" >&#x2713;</div>
+                      <div class="panel-heading">Technician</div>
+                      <div class="panel-body" t-field="doc.technician"/>
+                    </div>
+                  </div>
+
+
+                  <div class="panel-group">
+                    <div class="panel panel-default col-xs-12" col="12" id="informations" t-if="doc.laptop_adapter or doc.power_cord or doc.laptop_bag or doc.printer or doc.system_discs or doc.display or doc.modem or doc.router or doc.flash_drive or doc.external_hdd or doc.mouse or doc.keyboard or doc.air_card or doc.other">
+                      <div class="panel-heading">Peripherals</div>
+                      <div class="panel-body">
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.laptop_adapter">Adaptor</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.power_cord">Power Cord</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.laptop_bag">Laptop Bag</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.printer">Printer</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.system_discs">System Discs</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.display">Display</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.modem">Modem</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.router">Router</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.flash_drive">Flash Drive</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.external_hdd">External HDD</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.mouse">Mouse</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.keyboard">Keyboard</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.air_card">Air Card</p>
+                        <p class="mt0 mb0 col-xs-12" t-if="doc.other">Other: <span t-field="doc.other"/></p>
+                      </div>
+                    </div>
+                    <div class="panel panel-default col-xs-12" col="12" id="informations" t-if="doc.back_desktop or
+                      doc.back_documents or doc.back_downloads or doc.back_music or
+                      doc.back_movies or doc.back_photos or doc.back_favorites or
+                      doc.back_outlook or doc.back_contacts or doc.back_browser or
+                      doc.back_root or doc.back_etc or doc.back_program_data or
+                      doc.back_public or doc.back_users or doc.back_wallpaper or
+                      doc.back_quicken or doc.back_adobe or doc.back_autodesk or
+                      doc.back_other">
+                      <div class="panel-heading">Backup Requested</div>
+                      <div class="panel-body">
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.back_desktop">Desktop</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.back_documents">Documents</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.back_downloads">Downloads</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.back_music">Music</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.back_movies">Movies</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.back_photos">Photos</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.back_favorites">Favorites</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.back_outlook">Outlook</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.back_contacts">Contacts</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.back_browser">Browser</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.back_root">Root C:</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.back_etc">Etc</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.back_program_data">Program Data</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.back_public">Public</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.back_users">Users</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.back_wallpaper">Wallpaper</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.back_quicken">Quicken</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.back_adobe">Adobe</p>
+                        <p class="mt0 mb0 col-xs-2" t-if="doc.back_autodesk">Autodesk</p>
+                        <p class="mt0 mb0 col-xs-12" t-if="doc.back_other">Other: <span t-field="doc.back_other"/></p>
+                      </div>
+                    </div>
+                    <div class="panel panel-danger col-xs-12" col="12" id="informations">
+                      <div class="panel-heading">Problem Description</div>
+                      <div class="panel-body" t-field="doc.description"/>
+                    </div>
+                    <div class="panel panel-success col-xs-12" col="12" id="informations" t-if="doc.stage in ['complete','pickup']" >
+                      <div class="panel-heading">Work Performed</div>
+                      <div class="panel-body" t-field="doc.workperformed"/>
+                    </div>
+                  </div>
+
+
+
+                        <table class="table table-condensed mt16" t-if="doc.stage in ['complete','pickup']">
+                          <thead>
+                            <tr>
+                              <th>Description</th>
+                              <th class="text-right">Quantity</th>
+                              <th class="text-right">Unit Price</th>
+                              <th class="text-right price_tax_included">Total Price</th>
+                            </tr>
+                          </thead>
+                          <tbody class="sale_tbody">
+                            <t t-foreach="doc.line_ids" t-as="line">
+                              <tr>
+                                <td><span t-field="line.product_id"/></td>
+                                <td class="text-right"><span t-field="line.quantity"/></td>
+                                <td class="text-right"><span>&#36;</span><span t-field="line.price"/></td>
+                                <td class="text-right"><span>&#36;</span><span t-field="line.price_subtotal"/></td>
+                              </tr>
+                            </t>
+                          </tbody>
+                          <div class="clearfix">
+                            <div class="row" name="total">
+                              <div class="col-xs-4 pull-right">
+                                <table class="table table-condensed pull-right" style="min-width:200px;max-width:350px!important;">
+                                  <tr class="border-black">
+                                    <td class="pull-right"><strong>Total</strong></td>
+                                    <td class="text-right">
+                                      <span>&#36;</span>
+                                      <t t-set="total" t-value="sum(line.price_subtotal for line in doc.line_ids)"/>
+                                      <span t-esc="total"/>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </table>
+
+                  </div>
+                  <div  t-if="doc.stage not in ['complete','pickup']" style="position:absolute;top:700px; page-break-inside: avoid;">
+                    <div class="panel panel-default mb0">
+                      <div class="panel-heading text-center">Computiverse Terms and Conditions</div>
+                      <div class="panel-body" style="font-size:9.5px!important">Please note: Computiverse is not responsible for customer data, inquire about our data recovery or back up services. Standard rates are $75 for standard recoveries or at least $225 for advanced recoveries. Note that all repairs require a diagnostic fee up front. This fee is credited towards final cost of repair, but by itself is nonrefundable. Computiverse is not responsible for the status of equipment left over 30 days. If an item is left unclaimed it may incur a $30 a month storage fee and may be recycled or discarded. Computiverse is not responsible damages incurred while converting media (i.e. VHS Tapes). Note that there is a mandatory fee of $50 for outstanding accounts which issue charge backs or stop payments. Repairs requiring labor will be billed hourly or prorated if applicable. All device sales are final. In particular cases in-store credit may be provided minus a restocking fee though this is ultimately up to the discretion of Computiverse.
+                        <br/>
+                      All hardware repairs, with the exception of phones and tablets, come with limited warranties depending on the repair not extending beyond 30 days. Computiverse assumes no responsibility for computer equipment purchased at but not installed by Computiverse. Warranties are limited to services related to the repair which was completed successfully and is ultimately up to the discretion of our technicians. Virus Removals are not covered beyond the equipment leaving the shop. AVG will be installed on machines as a replacement for their current antivirus software as a part of the Virus Removal package, the customer assumes responsibilities for maintaining or recovering other antivirus subscriptions. Phone and tablet repairs receive no warranty once they leave Computiverse and are "as is" repairs. Note that phone or tablets are tightly packed by design and once opened we may discover additional damage beyond the scope of the original repair. This may incur additional charges as Computiverse is not responsible for damages to the device and is ultimately up to the discretion of Computiverse.
+                      </div>
+                      <br/>Signature: ______________________________________________________<span style="float:right">Date: _________________________</span></div>
+                      <div class="panel-footer text-center" style="padding-top:1px!important;font-size:10px!important">By signing this sheet you agree to Computiverse’s terms and conditions for service.</div>
+                    </div>
+                    <div  t-if="doc.stage in ['complete','pickup']" style="position:absolute;top:785px; page-break-inside: avoid;">
+                      <div class="panel panel-default mb0">
+                        <div class="panel-heading text-center">Computiverse Terms and Conditions</div>
+                        <div class="panel-body" style="font-size:9.5px!important">Please note: Computiverse peformed the aforementioned work as agreed upon by the customer and Computiverse technicians. I agree to pay the amount described above as was previously quoted to me by a Computiverse technician via either phone or email. A copy of the repair order will be kept on file at Computiverse for tracking and details should an issue arise. By signing below, you acknolwedge the work stated above was performed and you are resuming responsibility for your device(s) and no longer hold Computiverse responsible. For further details on our terms and conditions, see the original repair ticket when you opened this ticket, or on our website: computiverse.com.
+                        </div>
+                        <br/>Signature: ______________________________________________________<span style="float:right">Date: _________________________</span></div>
+                        <div class="panel-footer text-center" style="padding-top:1px!important;font-size:10px!important">By signing this sheet you agree to Computiverse’s terms and conditions for service.</div>
+                      </div>
+                    <div class="footer">
+                      <h4 class="text-center mb0">Find Computiverse on Social Media</h4>
+                      <h5 class="col-xs-6 text-center mt0"><span class="fa fa-large fa-facebook"/> facebook.com/Computiverse</h5>
+                      <h5 class="col-xs-6 text-center mt0"><span class="fa fa-large fa-twitter"/> twitter.com/Computiverse4u</h5>
+                    </div>
+                </t>
+              </t>
+            </t>
+          </template>
+        </data>
+      </odoo>

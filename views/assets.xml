@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="repaircenter.ticket_tree_scss" name="repaircenter.ticket_tree_scss" inherit_id="repaircenter.ticket_tree_view">
+        <xpath expr="." position="inside">
+          <link rel="stylesheet" type="text/scss" href="/repaircenter/static/src/scss/repairticket.scss"/>
+        </xpath>
+    </template>
+</odoo>

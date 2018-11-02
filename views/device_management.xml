@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+  <record id="repaircenter.devicemanagement_form_view" model="ir.ui.view">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+          <page name="studio_page_ngnzc" string="Device Management">
+            <group name="studio_group_ngnzc">
+              <field name="device" widget="many2many" string="Device Management">
+                <tree string="User Device Management" editable="top">
+                  <field name="name" modifiers="{}" string="Device"/>
+                  <field name="description"/>
+                  <field name="model"/>
+                </tree>
+              </field>
+              <group name="studio_group_ngnzc_left"/>
+              <group name="studio_group_ngnzc_right"/>
+            </group>
+          </page>
+        </xpath>
+      </data>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" ref="base.view_partner_form"/>
+    <field name="key" eval="False"/>
+    <field name="mode">extension</field>
+    <field name="model">res.partner</field>
+    <field name="name">res.partner.form</field>
+    <field name="priority">99</field>
+    <field name="type">form</field>
+  </record>
+
+  <record id="repaircenter.devicemanagement_template" model="ir.ui.view">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="User Device Management">
+          <div class="oe_title">
+            <h1>
+              <field name="name" required="1"/>
+            </h1>
+          </div>
+          <group name="studio_group_ecc51e">
+            <group name="studio_group_ecc51e_left"/>
+            <group name="studio_group_ecc51e_right"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">repaircenter.devicemanagement</field>
+    <field name="name">Default form view for repaircenter.devicemanagement</field>
+    <field name="priority">16</field>
+    <field name="type">form</field>
+  </record>
+  <record id="repaircenter.devicemanagement_tree_view" model="ir.ui.view">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <tree string="User Device Management" editable="top">
+        <field name="name" modifiers="{}"/>
+      </tree>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">repaircenter.devicemanagement</field>
+    <field name="name">Default tree view for repaircenter.devicemanagement</field>
+    <field name="priority">16</field>
+    <field name="type">tree</field>
+  </record>
+  <record id="repaircenter.devicemanagement_form" model="ir.ui.view">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//form[1]/sheet[1]/div[1]/h1[1]/field[@name='name']" position="attributes">
+          <attribute name="string">Device Name</attribute>
+        </xpath>
+        <xpath expr="//group[@name='studio_group_ecc51e_left']" position="attributes">
+          <attribute name="string">Administration</attribute>
+        </xpath>
+        <xpath expr="//group[@name='studio_group_ecc51e_left']" position="inside">
+          <field name="description" string="Device Description"/>
+          <field name="model" string="Device Model"/>
+          <field name="account" string="Admin Account"/>
+          <field name="password" string="Admin Password"/>
+        </xpath>
+        <xpath expr="//group[@name='studio_group_ecc51e_right']" position="attributes">
+          <attribute name="string">Internet Settings</attribute>
+        </xpath>
+        <xpath expr="//group[@name='studio_group_ecc51e_right']" position="inside">
+          <field name="ip" string="WAN/IP Address"/>
+          <field name="gateway" string="Default Gateway"/>
+          <field name="subnet" string="Subnet"/>
+        </xpath>
+        <xpath expr="//group[@name='studio_group_ecc51e']" position="after">
+          <field name="software">
+            <tree string="Device Software" editable="top">
+              <field name="name" modifiers="{}" string="Installed Software"/>
+              <field name="username" string="Username"/>
+              <field name="password" string="Password"/>
+            </tree>
+          </field>
+        </xpath>
+      </data>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" ref="repaircenter.devicemanagement_template"/>
+    <field name="key" eval="False"/>
+    <field name="mode">extension</field>
+    <field name="model">repaircenter.devicemanagement</field>
+    <field name="name">Default form view for repaircenter.devicemanagement</field>
+    <field name="priority">99</field>
+    <field name="type">form</field>
+  </record>
+  <record id="repaircenter.devicemanagement_form_template" model="ir.ui.view">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="Device Software">
+          <div class="oe_title">
+            <h1>
+              <field name="name" required="1"/>
+            </h1>
+          </div>
+          <group name="studio_group_ec896a">
+            <group name="studio_group_ec896a_left"/>
+            <group name="studio_group_ec896a_right"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" eval="False"/>
+    <field name="key" eval="False"/>
+    <field name="mode">primary</field>
+    <field name="model">repaircenter.devicesoftware</field>
+    <field name="name">Default form view for repaircenter.devicesoftware</field>
+    <field name="priority">16</field>
+    <field name="type">form</field>
+  </record>
+  <record id="repaircenter.devicemanagement_tree_template" model="ir.ui.view">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//field[@name='name']" position="attributes">
+          <attribute name="string">Device</attribute>
+        </xpath>
+        <xpath expr="//field[@name='name']" position="after">
+          <field name="description"/>
+          <field name="model"/>
+        </xpath>
+      </data>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" ref="repaircenter.devicemanagement_tree_view"/>
+    <field name="key" eval="False"/>
+    <field name="mode">extension</field>
+    <field name="model">repaircenter.devicemanagement</field>
+    <field name="name">Default tree view for repaircenter.devicemanagement</field>
+    <field name="priority">99</field>
+    <field name="type">tree</field>
+  </record>
+
+
+</odoo>

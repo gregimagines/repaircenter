@@ -1,0 +1,20 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+ticket_technician,Repair Tech,model_repaircenter_ticket,technician,1,1,0,0
+customerlabel_technician,Repair Tech,model_repaircenter_customerlabel,technician,1,1,0,0
+devicesoftware_technician,Repair Tech,model_repaircenter_devicesoftware,technician,1,1,0,0
+backuplocation_technician,Repair Tech,model_repaircenter_backuplocation,technician,1,1,0,0
+backupsoftware_technician,Repair Tech,model_repaircenter_backupsoftware,technician,1,1,0,0
+services_technician,Repair Tech,model_repaircenter_services,technician,1,1,0,0
+stages_technician,Repair Tech,model_repaircenter_stages,technician,1,1,0,0
+devicemangement_technician,Repair Tech,model_repaircenter_devicemanagement,technician,1,1,0,0
+peripherals_technician,Repair Tech,model_repaircenter_peripherals,administrator,1,1,0,0
+
+ticket_administrator,Repair Admin,model_repaircenter_ticket,administrator,1,1,1,1
+customerlabel_administrator,Repair Admin,model_repaircenter_customerlabel,administrator,1,1,1,1
+devicesoftware_administrator,Repair Admin,model_repaircenter_devicesoftware,administrator,1,1,1,1
+backuplocation_administrator,Repair Admin,model_repaircenter_backuplocation,administrator,1,1,1,1
+backupsoftware_administrator,Repair Admin,model_repaircenter_backupsoftware,administrator,1,1,1,1
+services_administrator,Repair Admin,model_repaircenter_services,administrator,1,1,1,1
+stages_administrator,Repair Admin,model_repaircenter_stages,administrator,1,1,1,1
+devicemangement_administrator,Repair Admin,model_repaircenter_devicemanagement,administrator,1,1,1,1
+peripherals_administrator,Repair Admin,model_repaircenter_peripherals,administrator,1,1,1,1

@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+  <!-- DEFAULT STAGES -->
+  <record id="stages_new" model="repaircenter.stages">
+    <field name="name">CHECKED IN</field>
+    <field name="sequence">0</field>
+    <field name="is_close" eval="False"/>
+    <field name="incoming" eval="True"/>
+  </record>
+  <record id="stages_in_diagnostics" model="repaircenter.stages">
+    <field name="name">DIAGNOSTICS</field>
+    <field name="sequence">1</field>
+    <field name="is_close" eval="False"/>
+  </record>
+  <record id="stages_awaiting_customer" model="repaircenter.stages">
+    <field name="name">AWAITING CUSTOMER</field>
+    <field name="sequence">2</field>
+    <field name="is_close" eval="False"/>
+  </record>
+  <record id="stages_awaiting_part" model="repaircenter.stages">
+    <field name="name">AWAITING PART</field>
+    <field name="sequence">3</field>
+    <field name="is_close" eval="False"/>
+  </record>
+  <record id="stages_installation" model="repaircenter.stages">
+    <field name="name">INSTALLATION</field>
+    <field name="sequence">4</field>
+    <field name="is_close" eval="False"/>
+  </record>
+  <record id="stages_complete" model="repaircenter.stages">
+    <field name="name">COMPLETE</field>
+    <field name="sequence">5</field>
+    <field name="is_close" eval="True"/>
+  </record>
+  <record id="stages_pickedup" model="repaircenter.stages">
+    <field name="name">PICKED UP</field>
+    <field name="sequence">6</field>
+    <field name="is_close" eval="True"/>
+    <field name="fold" eval="True"/>
+  </record>
+
+  <!-- DEFAULT SERVICE TYPES -->
+  <record id="services_virus" model="repaircenter.services">
+    <field name="name">Virus Removal</field>
+  </record>
+  <record id="services_hardware" model="repaircenter.services">
+    <field name="name">Hardware Repair</field>
+  </record>
+  <record id="services_software" model="repaircenter.services">
+    <field name="name">Software Install</field>
+  </record>
+  <record id="services_backup" model="repaircenter.services">
+    <field name="name">Backup/Restore</field>
+  </record>
+  <record id="services_media" model="repaircenter.services">
+    <field name="name">Media Conversion</field>
+  </record>
+  <record id="services_mobile" model="repaircenter.services">
+    <field name="name">Mobile Repair</field>
+  </record>
+  <record id="services_tune" model="repaircenter.services">
+    <field name="name">Tune Up</field>
+  </record>
+
+
+  <!-- DEFAULT BACKUP SOFTWARE -->
+  <record id="backupsoftware_Root" model="repaircenter.backupsoftware"><field name="name">Root</field></record>
+  <record id="backupsoftware_Outlook" model="repaircenter.backupsoftware"><field name="name">Outlook</field></record>
+  <record id="backupsoftware_Desktop" model="repaircenter.backupsoftware"><field name="name">Desktop</field></record>
+  <record id="backupsoftware_Documents" model="repaircenter.backupsoftware"><field name="name">Documents</field></record>
+  <record id="backupsoftware_Music" model="repaircenter.backupsoftware"><field name="name">Music</field></record>
+  <record id="backupsoftware_Movies" model="repaircenter.backupsoftware"><field name="name">Movies</field></record>
+  <record id="backupsoftware_Photos" model="repaircenter.backupsoftware"><field name="name">Photos</field></record>
+  <record id="backupsoftware_Downloads" model="repaircenter.backupsoftware"><field name="name">Downloads</field></record>
+  <record id="backupsoftware_Etc" model="repaircenter.backupsoftware"><field name="name">Etc</field></record>
+  <record id="backupsoftware_Public" model="repaircenter.backupsoftware"><field name="name">Public</field></record>
+  <record id="backupsoftware_Program Data" model="repaircenter.backupsoftware"><field name="name">Program Data</field></record>
+  <record id="backupsoftware_Users" model="repaircenter.backupsoftware"><field name="name">Users</field></record>
+  <record id="backupsoftware_Favorites" model="repaircenter.backupsoftware"><field name="name">Favorites</field></record>
+  <record id="backupsoftware_Wallpaper" model="repaircenter.backupsoftware"><field name="name">Wallpaper</field></record>
+  <record id="backupsoftware_Contacts" model="repaircenter.backupsoftware"><field name="name">Contacts</field></record>
+  <record id="backupsoftware_Browser" model="repaircenter.backupsoftware"><field name="name">Browser</field></record>
+  <record id="backupsoftware_Quicken" model="repaircenter.backupsoftware"><field name="name">Quicken</field></record>
+  <record id="backupsoftware_Adobe" model="repaircenter.backupsoftware"><field name="name">Adobe</field></record>
+  <record id="backupsoftware_Autodesk" model="repaircenter.backupsoftware"><field name="name">Autodesk</field></record>
+  <record id="backupsoftware_Shared" model="repaircenter.backupsoftware"><field name="name">Shared</field></record>
+  <record id="backupsoftware_Bookmarks" model="repaircenter.backupsoftware"><field name="name">Bookmarks</field></record>
+  
+</odoo>

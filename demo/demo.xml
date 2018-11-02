@@ -1,0 +1,31 @@
+<odoo>
+    <data>
+
+      <record model="repaircenter.stages" id="stage0">
+        <field name="name">CHECKED IN</field>
+      </record>
+      <record model="repaircenter.stages" id="stage1">
+        <field name="name">DIAGNOSTICS</field>
+      </record>
+      <record model="repaircenter.stages" id="stage2">
+        <field name="name">AWAITING CUSTOMER</field>
+      </record>
+      <record model="repaircenter.stages" id="stage3">
+        <field name="name">AWAITING PART</field>
+      </record>
+      <record model="repaircenter.stages" id="stage4">
+        <field name="name">INSTALLATION</field>
+      </record>
+      <record model="repaircenter.stages" id="stage5">
+        <field name="name">COMPLETE</field>
+        <field name="is_close">True</field>
+        <field name="fold">True</field>
+      </record>
+      <record model="repaircenter.stages" id="stage6">
+        <field name="name">RETURNED</field>
+        <field name="is_close">True</field>
+        <field name="fold">True</field>
+      </record>
+
+    </data>
+</odoo>
